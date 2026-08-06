@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>blooodyuki | Sound Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #07050a;
+            --surface-color: #110d18;
+            --surface-light: #1c1527;
+            --accent-color: #b535f6;
+            --accent-glow: rgba(181, 53, 246, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #b8b0c8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        html, body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevents any horizontal scrolling */
+            width: 100%;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(7, 5, 10, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--surface-light);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--text-main);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .lang-btn:hover {
+            background: var(--accent-color);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            word-wrap: break-word;
+        }
+
+        .section-title span {
+            color: var(--accent-color);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, var(--surface-light) 0%, var(--bg-color) 70%);
+            padding: 0 5%;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            word-wrap: break-word;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            color: #fff;
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-light);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        /* Projects 3D Flip Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 440px; /* INCREASED HEIGHT FOR RUSSIAN TEXT */
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            border: 1px solid var(--surface-light);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .flip-card-front {
+            background-color: var(--surface-color);
+            padding: 2rem;
+            justify-content: center;
+            transition: border-color 0.3s;
+        }
+
+        .flip-card:hover .flip-card-front {
+            border-color: var(--accent-color);
+        }
+
+        .flip-card-back {
+            background-color: var(--surface-light);
+            transform: rotateY(180deg);
+            border-color: var(--accent-color);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .click-hint {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Back side content */
+        .back-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--surface-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .back-header h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .close-flip {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+            padding: 5px;
+        }
+
+        .close-flip:hover {
+            color: var(--accent-color);
+        }
+
+        .video-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 5px;
+        }
+
+        .video-list::-webkit-scrollbar { width: 5px; }
+        .video-list::-webkit-scrollbar-track { background: var(--surface-color); border-radius: 5px; }
+        .video-list::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 5px; }
+
+        .video-item {
+            background: var(--surface-color);
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            text-align: left;
+        }
+
+        .video-item:hover {
+            background: rgba(181, 53, 246, 0.2);
+            transform: translateX(5px);
+        }
+
+        .video-thumb {
+            width: 60px;
+            height: 40px;
+            background: #000;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .video-info { display: flex; flex-direction: column; }
+        .video-info span { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+        .video-info small { font-size: 0.7rem; color: var(--text-muted); }
+
+        /* Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .video-modal.active { display: flex; animation: fadeIn 0.3s ease; }
+
+        .video-container {
+            width: 90%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            position: relative;
+            border-radius: 10px;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 0 30px rgba(181, 53, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px; right: 0;
+            background: none; border: none;
+            color: #fff; font-size: 2rem; cursor: pointer; transition: color 0.3s;
+        }
+        .close-modal:hover { color: var(--accent-color); }
+
+        /* Pricing */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            padding: 1rem 3rem;
+            background: var(--surface-color);
+            border: 1px solid var(--accent-color);
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-color);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .pricing-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .pricing-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .price-box {
+            background: var(--surface-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            border: 1px solid var(--text-main);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* RESPONSIVE TABLES */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 550px; /* Forces table to scroll instead of squishing on mobile */
+        }
+
+        .extras-table {
+            min-width: 100%; /* Extras table usually fits fine */
+            margin-bottom: 0;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--surface-light);
+        }
+
+        th {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        td {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: var(--surface-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .features-grid p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .features-grid i {
+            color: var(--accent-color);
+        }
+
+        .extras-table th, .extras-table td {
+            padding: 0.8rem;
+            font-size: 1rem;
+        }
+        
+        .extras-table td:last-child {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        /* Work Process */
+        .process {
+            background: var(--surface-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .process h3 { margin-bottom: 1.5rem; color: var(--accent-color); text-align: center; }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .process-step span {
+            color: var(--accent-color);
+            font-weight: 900;
+        }
+
+        /* Footer / Contact */
+        footer {
+            background: var(--surface-color);
+            padding: 4rem 5%;
+            text-align: center;
+            border-top: 2px solid var(--accent-color);
+        }
+
+        footer h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-link i {
+            font-size: 3rem;
+            background: var(--surface-light);
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--accent-color);
+            transition: all 0.3s;
+        }
+
+        .social-link:hover i {
+            background: var(--accent-color);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        
+        .social-link span {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .rate-info {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: var(--surface-light);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: none;
+            z-index: 100;
+        }
+
+        /* -------------------------------------------
+           MOBILE OPTIMIZATIONS (FIXES)
+           ------------------------------------------- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            
+            /* Logo Fix */
+            .logo { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                gap: 2px; 
+                font-size: 1.2rem;
+            }
+            .logo span { 
+                font-size: 0.65rem; 
+                letter-spacing: 1px;
+            }
+            
+            /* Grids Overflows Fix (Forces 1 column on mobile) */
+            .about-grid, 
+            .projects-grid, 
+            .features-grid, 
+            .process-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            /* Flip Card Adjustments */
+            .flip-card { height: 460px; } /* More room for wrapping text */
+            
+            /* Typography & Padding */
+            .hero h1 { font-size: 2.2rem; }
+            .hero h2 { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            section { padding: 80px 5%; }
+            
+            .price-box { padding: 1.5rem 1rem; }
+            table, th, td { font-size: 0.9rem; padding: 0.6rem; }
+            
+            /* UI Elements */
+            .tabs { flex-direction: column; }
+            .tab-btn { padding: 1rem; text-align: center; width: 100%; }
+            .socials { gap: 1.5rem; }
+            .video-container { width: 95%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">blooodyuki <span>Sound Designer</span></div>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#about" data-i18n="nav-about">About</a>
+                <a href="#projects" data-i18n="nav-projects">Projects</a>
+                <a href="#pricing" data-i18n="nav-pricing">Pricing</a>
+                <a href="#contact" data-i18n="nav-contact">Contact</a>
+            </div>
+            <button class="lang-btn" id="langToggle" onclick="toggleLang()">
+                <i class="fa-solid fa-globe"></i> <span id="langText">RU</span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>blooodyuki</h1>
+        <h2 data-i18n="hero-sub">SOUND DESIGNER & AUDIO ENGINEER</h2>
+        <p data-i18n="hero-desc">Creating immersive, high-quality audio for indie games, animation, mobile, PC, VR/AR, short films, and interactive media.</p>
+        <a href="#pricing" class="btn" data-i18n="btn-price">View Pricing</a>
+    </header>
+
+    <section id="about">
+        <h2 class="section-title" data-i18n="about-title">About <span>Me</span></h2>
+        <div class="about-grid">
+            <div class="card">
+                <h3 data-i18n="about-1-t"><i class="fa-solid fa-waveform"></i> The Craft</h3>
+                <p style="margin-top: 1rem; color: var(--text-muted);" data-i18n="about-1-d">As a professional sound designer, I build immersive auditory worlds. I specialize in delivering high-fidelity soundscapes, mixing, and audio integration for films, television series, video games, and animation.</p>
+            </div>
+            <div class="card">
+                <h3 data-i18n="about-2-t"><i class="fa-solid fa-gamepad"></i> The Vision</h3>
+                <p style="margin-top: 1rem; color: var(--text-muted);" data-i18n="about-2-d">Whether it's bringing a UI to life, crafting the perfect creature roar, or balancing complex foley, I ensure the audio perfectly complements the visual storytelling.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <button class="close-modal" onclick="closeVideo()"><i class="fa-solid fa-xmark"></i></button>
+            <div id="videoPlaceholderText" style="text-align: center;">
+                <i class="fa-solid fa-video fa-3x" style="margin-bottom: 1rem; color: var(--accent-color);"></i>
+                <h3 id="videoTitle" style="color: #fff;">Video Title</h3>
+                <p style="margin-top: 0.5rem;" data-i18n="vid-ph">Placeholder for iframe/mp4 player.</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="pricing">
+        <h2 class="section-title" data-i18n="price-title">Price <span>Lists</span></h2>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('games')" data-i18n="tab-games">For Games</button>
+            <button class="tab-btn" onclick="switchTab('animation')" data-i18n="tab-anim">For Animation</button>
+        </div>
+
+        <!-- FOR GAMES PRICING -->
+        <div id="games" class="pricing-content active">
+            <div class="price-box">
+                <div class="tags">
+                    <span class="tag" data-i18n="tag-sfx">CUSTOM SFX</span>
+                    <span class="tag" data-i18n="tag-integ">AUDIO INTEGRATION</span>
+                    <span class="tag" data-i18n="tag-amb">AMBIENCE</span>
+                    <span class="tag" data-i18n="tag-foley">FOLEY</span>
+                </div>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;" data-i18n="target-games">For: indie games, mobile, PC, console, VR/AR, interactive media</p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-i18n="th-serv">SERVICE</th>
+                                <th data-i18n="th-time">EST. TIME</th>
+                                <th data-i18n="th-price">PRICE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td data-i18n="gs1">UI SFX <span style="font-size:0.8rem; font-weight:400;">(1 sound)</span></td><td data-i18n="gt1">1 - 1.5 hrs</td><td class="dyn-price" data-type="range" data-min="15" data-max="25">15 - 25 $</td></tr>
+                            <tr><td data-i18n="gs2">UI SFX Pack <span style="font-size:0.8rem; font-weight:400;">(10 sounds)</span></td><td data-i18n="gt2">10 - 15 hrs</td><td class="dyn-price" data-type="range" data-min="125" data-max="200">125 - 200 $</td></tr>
+                            <tr><td data-i18n="gs3">Ambience Loop <span style="font-size:0.8rem; font-weight:400;">(1 track)</span></td><td data-i18n="gt3">3 - 4 hrs</td><td class="dyn-price" data-type="range" data-min="50" data-max="75">50 - 75 $</td></tr>
+                            <tr><td data-i18n="gs4">Foley set <span style="font-size:0.8rem; font-weight:400;">(footsteps + interactions)</span></td><td data-i18n="gt4">8 - 12 hrs</td><td class="dyn-price" data-type="range" data-min="125" data-max="200">125 - 200 $</td></tr>
+                            <tr><td data-i18n="gs5">Weapon / Combat SFX <span style="font-size:0.8rem; font-weight:400;">(1 sound)</span></td><td data-i18n="gt5">2 - 3 hrs</td><td class="dyn-price" data-type="range" data-min="30" data-max="50">30 - 50 $</td></tr>
+                            <tr><td data-i18n="gs6">Creature Voice Set <span style="font-size:0.8rem; font-weight:400;">(4-5 sounds)</span></td><td data-i18n="gt6">6 - 8 hrs</td><td class="dyn-price" data-type="range" data-min="100" data-max="150">100 - 150 $</td></tr>
+                            <tr><td data-i18n="gs7">Full Level Sound Design</td><td data-i18n="gt7">20 - 30 hrs</td><td class="dyn-price" data-type="range" data-min="300" data-max="450">300 - 450 $</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="features-grid">
+                    <p><i class="fa-solid fa-check"></i> <span data-i18n="gf1">Custom sound design (SFX, ambience, foley)</span></p>
+                    <p><i class="fa-solid fa-check"></i> <span data-i18n="gf2">Delivery in any format (WAV, OGG, MP3)</span></p>
+                    <p><i class="fa-solid fa-check"></i> <span data-i18n="gf4">Source files + implementation notes</span></p>
+                    <p><i class="fa-solid fa-check"></i> <span data-i18n="gf5">2 rounds of revisions</span></p>
+                </div>
+
+                <div class="table-wrapper" style="margin-bottom: 0;">
+                    <table class="extras-table">
+                        <tbody>
+                            <tr><td style="border-bottom: 1px solid var(--surface-light); text-decoration: underline; text-underline-offset: 4px;" data-i18n="ext1">Extra revision round</td><td style="border-bottom: 1px solid var(--surface-light);" class="dyn-price" data-type="fixed" data-val="40">40$</td></tr>
+                            <tr><td style="border-bottom: 1px solid var(--surface-light); text-decoration: underline; text-underline-offset: 4px;" data-i18n="ext2">Rush delivery under 48h</td><td style="border-bottom: 1px solid var(--surface-light);">+50%</td></tr>
+                            <tr><td style="border-bottom: 1px solid var(--surface-light); text-decoration: underline; text-underline-offset: 4px;" data-i18n="ext3">Exclusive rights, no reuse</td><td style="border-bottom: 1px solid var(--surface-light);">+30%</td></tr>
+                            <tr><td style="border-bottom: none; text-decoration: underline; text-underline-offset: 4px;" data-i18n="ext4g">Adaptive audio / music system setup</td><td style="border-bottom: none;" data-i18n="ext-quote">Custom quote</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOR ANIMATION PRICING -->
+        <div id="animation" class="pricing-content">
+            <div class="price-box">
+                <div class="tags">
+                    <span class="tag" data-i18n="tag-sfx">CUSTOM SFX</span>
+                    <span class="tag" data-i18n="tag-mix">MIXING TO PICTURE</span>
+                    <span class="tag" data-i18n="tag-amb">AMBIENCE</span>
+                    <span class="tag" data-i18n="tag-foley">FOLEY</span>
+                </div>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;" data-i18n="target-anim">For: 2D/3D animation, short films, trailers, cutscenes</p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-i18n="th-dur">DURATION</th>
+                                <th data-i18n="th-time">EST. HOURS</th>
+                                <th data-i18n="th-price">PRICE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td data-i18n="as1">Up to 30 sec</td><td data-i18n="at1">3 - 4 hrs</td><td class="dyn-price" data-type="range" data-min="50" data-max="75">50 - 75 $</td></tr>
+                            <tr><td data-i18n="as2">30 sec - 1 min</td><td data-i18n="at2">5 - 7 hrs</td><td class="dyn-price" data-type="range" data-min="90" data-max="125">90 - 125 $</td></tr>
+                            <tr><td data-i18n="as3">1 - 2 min</td><td data-i18n="at3">7 - 13 hrs</td><td class="dyn-price" data-type="range" data-min="150" data-max="225">150 - 225 $</td></tr>
+                            <tr><td data-i18n="as4">2 - 3 min</td><td data-i18n="at4">13 - 20 hrs</td><td class="dyn-price" data-type="range" data-min="250" data-max="350">250 - 350 $</td></tr>
+                            <tr><td data-i18n="as5">3 - 5 min</td><td data-i18n="at5">20 - 30 hrs</td><td class="dyn-price" data-type="range" data-min="375" data-max="500">375 - 500 $</td></tr>
+                            <tr><td data-i18n="as6">5+ min</td><td data-i18n="at6">Custom</td><td data-i18n="ext-contact">Contact me</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="features-grid">
+                    <p><i class="fa-solid fa-check"></i> <span data-i18n="af1">Full sound design: SFX, ambience, foley.</span></p>
+                    <p><i class="fa-solid fa-check"></i> <span data-i18n="af2">Mixing to picture.</span></p>
+                    <p><i class="fa-solid fa-check"></i> <span data-i18n="af3">Delivery in any format: WAV, MP3, OGG.</span></p>
+                    <p><i class="fa-solid fa-check"></i> <span data-i18n="gf5">2 rounds of revisions.</span></p>
+                    <p><i class="fa-solid fa-check"></i> <span data-i18n="af5">Source files included.</span></p>
+                </div>
+
+                <div class="table-wrapper" style="margin-bottom: 0;">
+                    <table class="extras-table">
+                        <tbody>
+                            <tr><td style="border-bottom: 1px solid var(--surface-light); text-decoration: underline; text-underline-offset: 4px;" data-i18n="ext1">Extra revision round</td><td style="border-bottom: 1px solid var(--surface-light);" class="dyn-price" data-type="fixed" data-val="40">40$</td></tr>
+                            <tr><td style="border-bottom: 1px solid var(--surface-light); text-decoration: underline; text-underline-offset: 4px;" data-i18n="ext2">Rush delivery under 48h</td><td style="border-bottom: 1px solid var(--surface-light);">+50%</td></tr>
+                            <tr><td style="border-bottom: 1px solid var(--surface-light); text-decoration: underline; text-underline-offset: 4px;" data-i18n="ext3">Exclusive rights, no reuse</td><td style="border-bottom: 1px solid var(--surface-light);">+30%</td></tr>
+                            <tr><td style="border-bottom: none; text-decoration: underline; text-underline-offset: 4px;" data-i18n="ext4a">Music composition</td><td style="border-bottom: none;" data-i18n="ext-none">Not provided</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- WORK PROCESS -->
+        <div class="process">
+            <h3 data-i18n="proc-title">WORK PROCESS</h3>
+            <div class="process-grid">
+                <div class="process-step" data-i18n="p1"><span>1.</span> You send reference / brief / animatic.</div>
+                <div class="process-step" data-i18n="p4"><span>4.</span> I work -> send first draft.</div>
+                <div class="process-step" data-i18n="p2"><span>2.</span> I estimate hours and send fixed price.</div>
+                <div class="process-step" data-i18n="p5"><span>5.</span> You give feedback (2 rounds included).</div>
+                <div class="process-step" data-i18n="p3"><span>3.</span> 50% prepayment to start.</div>
+                <div class="process-step" data-i18n="p6"><span>6.</span> Final delivery + remaining 50%.</div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer id="contact">
+        <h2 data-i18n="foot-title">Ready to bring your project to life?</h2>
+        <div class="socials">
+            <a href="https://instagram.com/blooodyuki" class="social-link" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+                <span>blooodyuki</span>
+            </a>
+            <a href="https://t.me/Bablhaha" class="social-link" target="_blank">
+                <i class="fa-brands fa-telegram"></i>
+                <span>@Bablhaha</span>
+            </a>
+            <a href="https://tiktok.com/@lolicofg" class="social-link" target="_blank">
+                <i class="fa-brands fa-tiktok"></i>
+                <span>@lolicofg</span>
+            </a>
+        </div>
+        <p style="color: var(--text-muted); margin-top: 2rem; font-size: 0.9rem;" data-i18n="foot-copy">© 2026 blooodyuki. All rights reserved.</p>
+    </footer>
+    
+    <div class="rate-info" id="rateInfo">1 USD = <span id="rateValue">...</span> RUB</div>
+
+    <script>
+        // --- 3D FLIP & VIDEO MODAL SYSTEM ---
+        function toggleFlip(cardElement) {
+            if (!cardElement.classList.contains('flipped')) {
+                document.querySelectorAll('.flip-card.flipped').forEach(card => {
+                    card.classList.remove('flipped');
+                });
+                cardElement.classList.add('flipped');
+            }
+        }
+
+        function closeFlip(cardElement) {
+            cardElement.classList.remove('flipped');
+        }
+
+        function openVideo(title) {
+            const isRu = currentLang === 'ru';
+            const titleMap = {
+                'Main Showreel 2026': 'v-game-1',
+                'UI Sounds Demo': 'v-game-2',
+                'Combat & Weapons': 'v-game-3',
+                'Sci-Fi Short Film': 'v-anim-1',
+                '2D Cartoon Demo': 'v-anim-2',
+                'VR Ambience Walkthrough': 'v-int-1',
+                'Adaptive Music System': 'v-int-2'
+            };
+
+            let displayTitle = title;
+            if(isRu && titleMap[title] && translations[titleMap[title]]) {
+                displayTitle = translations[titleMap[title]].ru;
+            }
+
+            document.getElementById('videoTitle').innerText = displayTitle;
+            document.getElementById('videoModal').classList.add('active');
+        }
+
+        function closeVideo() {
+            document.getElementById('videoModal').classList.remove('active');
+        }
+
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideo();
+            }
+        });
+
+        // --- TABS ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.pricing-content').forEach(content => content.classList.remove('active'));
+            
+            if(tabId === 'games') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            } else {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            }
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // --- TRANSLATION & CURRENCY SYSTEM ---
+        let currentLang = 'en';
+        let usdToRub = 90;
+
+        const translations = {
+            "nav-about": { en: "About", ru: "Обо мне" },
+            "nav-projects": { en: "Projects", ru: "Проекты" },
+            "nav-pricing": { en: "Pricing", ru: "Цены" },
+            "nav-contact": { en: "Contact", ru: "Контакты" },
+            
+            "hero-sub": { en: "SOUND DESIGNER & AUDIO ENGINEER", ru: "САУНД-ДИЗАЙНЕР И ЗВУКОРЕЖИССЕР" },
+            "hero-desc": { en: "Creating immersive, high-quality audio for indie games, animation, mobile, PC, VR/AR, short films, and interactive media.", ru: "Создаю иммерсивный звук высокого качества для инди-игр, анимации, мобильных, ПК, консолей, VR/AR, короткометражек и интерактивных медиа." },
+            "btn-price": { en: "View Pricing", ru: "Прайс-листы" },
+            
+            "about-title": { en: "About <span>Me</span>", ru: "Обо <span>мне</span>" },
+            "about-1-t": { en: '<i class="fa-solid fa-waveform"></i> The Craft', ru: '<i class="fa-solid fa-waveform"></i> Ремесло' },
+            "about-1-d": { en: "As a professional sound designer, I build immersive auditory worlds. I specialize in delivering high-fidelity soundscapes, mixing, and audio integration for films, television series, video games, and animation.", ru: "Как профессиональный саунд-дизайнер, я создаю глубокие звуковые миры. Специализируюсь на детальных саундскейпах, сведении и аудиоинтеграции для фильмов, сериалов, видеоигр и анимации." },
+            "about-2-t": { en: '<i class="fa-solid fa-gamepad"></i> The Vision', ru: '<i class="fa-solid fa-gamepad"></i> Подход' },
+            "about-2-d": { en: "Whether it's bringing a UI to life, crafting the perfect creature roar, or balancing complex foley, I ensure the audio perfectly complements the visual storytelling.", ru: "Будь то оживление интерфейса, создание идеального рыка монстра или баланс сложных фоли-шумов, я слежу за тем, чтобы звук идеально дополнял визуальную историю." },
+            
+            "proj-title": { en: "My <span>Projects</span>", ru: "Мои <span>Проекты</span>" },
+            "proj-1-t": { en: "Game Audio Showreel", ru: "Шоурил (Игры)" },
+            "proj-1-d": { en: "A compilation of custom SFX, UI sounds, and in-engine audio integration.", ru: "Подборка кастомных SFX, звуков интерфейса и интеграции в движок." },
+            "proj-2-t": { en: "Animation Sound Design", ru: "Звук для анимации" },
+            "proj-2-d": { en: "Foley, ambience, and final mix to picture for 2D/3D animated shorts.", ru: "Фоли, эмбиент и финальное сведение под картинку для 2D/3D анимации." },
+            "proj-3-t": { en: "Interactive Media", ru: "Интерактивные медиа" },
+            "proj-3-d": { en: "Adaptive audio systems and dynamic soundscapes for VR/AR projects.", ru: "Адаптивные аудиосистемы и динамические саундскейпы для VR/AR." },
+            
+            "click-view": { en: "Click to view", ru: "Нажмите, чтобы открыть" },
+            "vid-ph": { en: "Placeholder for iframe/mp4 player.", ru: "Здесь будет встроенный плеер для видео." },
+
+            "v-game-1": { en: "Main Showreel 2026", ru: "Главный Шоурил 2026" },
+            "v-game-1-d": { en: "SFX & Integration", ru: "SFX и Интеграция" },
+            "v-game-2": { en: "UI Sounds Demo", ru: "Демо звуков UI" },
+            "v-game-2-d": { en: "Menu & HUD interactions", ru: "Меню и HUD интерфейс" },
+            "v-game-3": { en: "Combat & Weapons", ru: "Оружие и Бой" },
+            "v-game-3-d": { en: "Impacts, Magic, Guns", ru: "Удары, магия, огнестрел" },
+            
+            "v-anim-1": { en: "Sci-Fi Short Film", ru: "Короткометражка (Sci-Fi)" },
+            "v-anim-1-d": { en: "Full Mix & Foley", ru: "Полный микс и фоли" },
+            "v-anim-2": { en: "2D Cartoon Demo", ru: "Демо 2D Мультфильма" },
+            "v-anim-2-d": { en: "Slapstick SFX", ru: "Мультяшные звуки" },
+
+            "v-int-1": { en: "VR Walkthrough", ru: "VR Прогулка" },
+            "v-int-1-d": { en: "Spatial Audio 360°", ru: "Пространственное аудио 360°" },
+            "v-int-2": { en: "Adaptive Music", ru: "Адаптивная музыка" },
+            "v-int-2-d": { en: "FMOD implementation", ru: "Реализация через FMOD" },
+
+            "price-title": { en: "Price <span>Lists</span>", ru: "Прайс <span>Листы</span>" },
+            "tab-games": { en: "For Games", ru: "Для Игр" },
+            "tab-anim": { en: "For Animation", ru: "Для Анимации" },
+            "tag-sfx": { en: "CUSTOM SFX", ru: "КАСТОМНЫЕ SFX" },
+            "tag-integ": { en: "AUDIO INTEGRATION", ru: "АУДИО ИНТЕГРАЦИЯ" },
+            "tag-amb": { en: "AMBIENCE", ru: "ЭМБИЕНТ" },
+            "tag-foley": { en: "FOLEY", ru: "ФОЛИ" },
+            "tag-mix": { en: "MIXING TO PICTURE", ru: "СВЕДЕНИЕ" },
+            "target-games": { en: "For: indie games, mobile, PC, console, VR/AR, interactive media", ru: "Для: инди-игр, мобайл, ПК, консолей, VR/AR, интерактивных медиа" },
+            "target-anim": { en: "For: 2D/3D animation, short films, trailers, cutscenes", ru: "Для: 2D/3D анимации, короткометражек, трейлеров, катсцен" },
+            
+            "th-serv": { en: "SERVICE", ru: "УСЛУГА" },
+            "th-time": { en: "EST. TIME", ru: "ВРЕМЯ" },
+            "th-price": { en: "PRICE", ru: "ЦЕНА" },
+            "th-dur": { en: "DURATION", ru: "ХРОНОМЕТРАЖ" },
+
+            "gs1": { en: 'UI SFX <span style="font-size:0.8rem; font-weight:400;">(1 sound)</span>', ru: 'UI SFX <span style="font-size:0.8rem; font-weight:400;">(1 звук)</span>' },
+            "gt1": { en: "1 - 1.5 hrs", ru: "1 - 1.5 ч" },
+            "gs2": { en: 'UI SFX Pack <span style="font-size:0.8rem; font-weight:400;">(10 sounds)</span>', ru: 'UI SFX Пак <span style="font-size:0.8rem; font-weight:400;">(10 звуков)</span>' },
+            "gt2": { en: "10 - 15 hrs", ru: "10 - 15 ч" },
+            "gs3": { en: 'Ambience Loop <span style="font-size:0.8rem; font-weight:400;">(1 track)</span>', ru: 'Эмбиент Луп <span style="font-size:0.8rem; font-weight:400;">(1 трек)</span>' },
+            "gt3": { en: "3 - 4 hrs", ru: "3 - 4 ч" },
+            "gs4": { en: 'Foley set <span style="font-size:0.8rem; font-weight:400;">(footsteps + interactions)</span>', ru: 'Фоли сет <span style="font-size:0.8rem; font-weight:400;">(шаги + интеракции)</span>' },
+            "gt4": { en: "8 - 12 hrs", ru: "8 - 12 ч" },
+            "gs5": { en: 'Weapon / Combat SFX <span style="font-size:0.8rem; font-weight:400;">(1 sound)</span>', ru: 'Оружие / Бой SFX <span style="font-size:0.8rem; font-weight:400;">(1 звук)</span>' },
+            "gt5": { en: "2 - 3 hrs", ru: "2 - 3 ч" },
+            "gs6": { en: 'Creature Voice Set <span style="font-size:0.8rem; font-weight:400;">(4-5 sounds)</span>', ru: 'Голоса монстров <span style="font-size:0.8rem; font-weight:400;">(4-5 звуков)</span>' },
+            "gt6": { en: "6 - 8 hrs", ru: "6 - 8 ч" },
+            "gs7": { en: "Full Level Sound Design", ru: "Озвучка уровня целиком" },
+            "gt7": { en: "20 - 30 hrs", ru: "20 - 30 ч" },
+            "gs8": { en: 'Audio Integration <span style="font-size:0.8rem; font-weight:400;">(Wwise / FMOD / Unity)</span>', ru: 'Аудио интеграция <span style="font-size:0.8rem; font-weight:400;">(Wwise / FMOD / Unity)</span>' },
+            "gt8": { en: "per hour", ru: "за час" },
+
+            "gf1": { en: "Custom sound design (SFX, ambience, foley)", ru: "Кастомный саунд-дизайн (SFX, эмбиент, фоли)" },
+            "gf2": { en: "Delivery in any format (WAV, OGG, MP3)", ru: "Сдача в любом формате (WAV, OGG, MP3)" },
+            "gf3": { en: "Audio integration in engine (Wwise, FMOD, Unity)", ru: "Интеграция в движок (Wwise, FMOD, Unity)" },
+            "gf4": { en: "Source files + implementation notes", ru: "Исходники + заметки по внедрению" },
+            "gf5": { en: "2 rounds of revisions", ru: "2 итерации бесплатных правок" },
+            "gf6": { en: "Testing in-game before delivery", ru: "Тестирование в игре перед сдачей" },
+
+            "as1": { en: "Up to 30 sec", ru: "До 30 сек" },
+            "at1": { en: "3 - 4 hrs", ru: "3 - 4 ч" },
+            "as2": { en: "30 sec - 1 min", ru: "30 сек - 1 мин" },
+            "at2": { en: "5 - 7 hrs", ru: "5 - 7 ч" },
+            "as3": { en: "1 - 2 min", ru: "1 - 2 мин" },
+            "at3": { en: "7 - 13 hrs", ru: "7 - 13 ч" },
+            "as4": { en: "2 - 3 min", ru: "2 - 3 мин" },
+            "at4": { en: "13 - 20 hrs", ru: "13 - 20 ч" },
+            "as5": { en: "3 - 5 min", ru: "3 - 5 мин" },
+            "at5": { en: "20 - 30 hrs", ru: "20 - 30 ч" },
+            "as6": { en: "5+ min", ru: "5+ мин" },
+            "at6": { en: "Custom", ru: "Индив." },
+            
+            "af1": { en: "Full sound design: SFX, ambience, foley.", ru: "Полный саунд-дизайн: SFX, эмбиент, фоли." },
+            "af2": { en: "Mixing to picture.", ru: "Сведение под картинку." },
+            "af3": { en: "Delivery in any format: WAV, MP3, OGG.", ru: "Сдача в любом формате: WAV, MP3, OGG." },
+            "af5": { en: "Source files included.", ru: "Исходные файлы включены." },
+
+            "ext1": { en: "Extra revision round", ru: "Доп. итерация правок" },
+            "ext2": { en: "Rush delivery under 48h", ru: "Срочная сдача до 48ч" },
+            "ext3": { en: "Exclusive rights, no reuse", ru: "Эксклюзивные права" },
+            "ext4g": { en: "Adaptive audio / music system setup", ru: "Настройка адаптивного аудио / музыки" },
+            "ext4a": { en: "Music composition", ru: "Написание музыки" },
+            "ext-quote": { en: "Custom quote", ru: "Индивидуально" },
+            "ext-none": { en: "Not provided", ru: "Не предоставляется" },
+            "ext-contact": { en: "Contact me", ru: "Свяжитесь со мной" },
+
+            "proc-title": { en: "WORK PROCESS", ru: "КАК Я РАБОТАЮ" },
+            "p1": { en: "<span>1.</span> You send reference / brief / animatic.", ru: "<span>1.</span> Вы скидываете ТЗ / реф / аниматик." },
+            "p2": { en: "<span>2.</span> I estimate hours and send fixed price.", ru: "<span>2.</span> Я оцениваю часы и называю цену." },
+            "p3": { en: "<span>3.</span> 50% prepayment to start.", ru: "<span>3.</span> 50% предоплата для старта." },
+            "p4": { en: "<span>4.</span> I work -> send first draft.", ru: "<span>4.</span> Я работаю -> скидываю драфт." },
+            "p5": { en: "<span>5.</span> You give feedback (2 rounds included).", ru: "<span>5.</span> Вы даете фидбек (2 итерации)." },
+            "p6": { en: "<span>6.</span> Final delivery + remaining 50%.", ru: "<span>6.</span> Сдача + остаток 50%." },
+
+            "foot-title": { en: "Ready to bring your project to life?", ru: "Готовы воплотить проект в жизнь?" },
+            "foot-copy": { en: "© 2026 blooodyuki. All rights reserved.", ru: "© 2026 blooodyuki. Все права защищены." }
+        };
+
+        async function fetchExchangeRate() {
+            try {
+                const response = await fetch('https://open.er-api.com/v6/latest/USD');
+                const data = await response.json();
+                if (data && data.rates && data.rates.RUB) {
+                    usdToRub = data.rates.RUB;
+                    document.getElementById('rateValue').innerText = usdToRub.toFixed(2);
+                }
+            } catch (error) {
+                console.error("Could not fetch exchange rate, using fallback.");
+                document.getElementById('rateValue').innerText = "~" + usdToRub;
+            }
+            updatePrices();
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'en' ? 'ru' : 'en';
+            document.getElementById('langText').innerText = currentLang === 'en' ? 'RU' : 'EN';
+            
+            document.getElementById('rateInfo').style.display = currentLang === 'ru' ? 'block' : 'none';
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(translations[key] && translations[key][currentLang]) {
+                    el.innerHTML = translations[key][currentLang];
+                }
+            });
+
+            updatePrices();
+        }
+
+        function updatePrices() {
+            document.querySelectorAll('.dyn-price').forEach(el => {
+                const type = el.getAttribute('data-type');
+                const isRu = currentLang === 'ru';
+                const sym = isRu ? '₽' : '$';
+                const rate = isRu ? usdToRub : 1;
+                
+                const format = (val) => {
+                    const parsed = parseFloat(val);
+                    if (!isRu) return parsed;
+                    return Math.round((parsed * rate) / 100) * 100;
+                };
+
+                if (type === 'range') {
+                    const min = format(el.getAttribute('data-min'));
+                    const max = format(el.getAttribute('data-max'));
+                    el.innerText = isRu ? `${min} - ${max} ${sym}` : `${min} - ${max} ${sym}`;
+                } else if (type === 'fixed') {
+                    const val = format(el.getAttribute('data-val'));
+                    el.innerText = `${val}${sym}`;
+                } else if (type === 'hourly') {
+                    const min = format(el.getAttribute('data-min'));
+                    const max = format(el.getAttribute('data-max'));
+                    const suffix = isRu ? '/час' : '/hr';
+                    el.innerText = `${min} - ${max} ${sym}${suffix}`;
+                }
+            });
+        }
+
+        fetchExchangeRate();
+
+    </script>
+</body>
+</html>
