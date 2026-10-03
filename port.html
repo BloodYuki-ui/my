@@ -542,6 +542,76 @@
             font-weight: 600;
         }
 
+        /* -------------------------------------------
+           DISCOUNT / SALE MODE
+           ------------------------------------------- */
+        .dyn-price {
+            white-space: nowrap;
+        }
+
+        .price-stack {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            white-space: nowrap;
+        }
+
+        .price-old {
+            position: relative;
+            display: inline-block;
+            color: var(--text-main);
+            opacity: 0.72;
+            font-size: 0.92em;
+        }
+
+        /* Purple brush-like strike through the old price */
+        .price-old::after {
+            content: "";
+            position: absolute;
+            left: -5%;
+            top: 50%;
+            width: 110%;
+            height: 0.42em;
+            transform: translateY(-50%) rotate(-2deg);
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                var(--accent-color) 7%,
+                #ca55ff 48%,
+                var(--accent-color) 93%,
+                transparent 100%
+            );
+            clip-path: polygon(
+                0 44%, 6% 24%, 14% 39%, 23% 17%, 34% 36%,
+                47% 14%, 59% 35%, 71% 18%, 83% 39%, 94% 21%,
+                100% 37%, 97% 67%, 88% 82%, 77% 65%, 64% 86%,
+                51% 67%, 38% 84%, 26% 64%, 15% 81%, 6% 63%, 0 72%
+            );
+            -webkit-clip-path: polygon(
+                0 44%, 6% 24%, 14% 39%, 23% 17%, 34% 36%,
+                47% 14%, 59% 35%, 71% 18%, 83% 39%, 94% 21%,
+                100% 37%, 97% 67%, 88% 82%, 77% 65%, 64% 86%,
+                51% 67%, 38% 84%, 26% 64%, 15% 81%, 6% 63%, 0 72%
+            );
+            filter: drop-shadow(0 0 5px var(--accent-glow));
+            pointer-events: none;
+        }
+
+        .price-sale {
+            color: var(--text-main);
+            font-weight: 900;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        @media (max-width: 768px) {
+            .price-stack {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.1rem;
+            }
+        }
+
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -988,6 +1058,13 @@
         let currentLang = 'en';
         let usdToRub = 90;
 
+        // --- SALE SWITCH ---
+        // Change only this value:
+        // 'ON'  = old price + purple brush strike + 50% price
+        // 'OFF' = normal prices
+        const SALE_MODE = 'ON';
+        const SALE_MULTIPLIER = 0.5;
+
         const translations = {
             "nav-about": { en: "About", ru: "Обо мне" },
             "nav-projects": { en: "Projects", ru: "Проекты" },
@@ -1144,32 +1221,57 @@
 
             updatePrices();
         }
-
         function updatePrices() {
+            const saleIsOn = String(SALE_MODE).trim().toUpperCase() === 'ON';
+
             document.querySelectorAll('.dyn-price').forEach(el => {
                 const type = el.getAttribute('data-type');
                 const isRu = currentLang === 'ru';
                 const sym = isRu ? '₽' : '$';
                 const rate = isRu ? usdToRub : 1;
-                
+
                 const format = (val) => {
                     const parsed = parseFloat(val);
                     if (!isRu) return parsed;
                     return Math.round((parsed * rate) / 100) * 100;
                 };
 
+                // We halve the already displayed value, so the visible sale price
+                // is exactly 50% of the visible old price in both USD and RUB.
+                const saleValue = (displayValue) => displayValue * SALE_MULTIPLIER;
+
+                let regularText = '';
+                let saleText = '';
+
                 if (type === 'range') {
                     const min = format(el.getAttribute('data-min'));
                     const max = format(el.getAttribute('data-max'));
-                    el.innerText = isRu ? `${min} - ${max} ${sym}` : `${min} - ${max} ${sym}`;
+
+                    regularText = `${min} - ${max} ${sym}`;
+                    saleText = `${saleValue(min)} - ${saleValue(max)} ${sym}`;
                 } else if (type === 'fixed') {
                     const val = format(el.getAttribute('data-val'));
-                    el.innerText = `${val}${sym}`;
+
+                    regularText = `${val}${sym}`;
+                    saleText = `${saleValue(val)}${sym}`;
                 } else if (type === 'hourly') {
                     const min = format(el.getAttribute('data-min'));
                     const max = format(el.getAttribute('data-max'));
                     const suffix = isRu ? '/час' : '/hr';
-                    el.innerText = `${min} - ${max} ${sym}${suffix}`;
+
+                    regularText = `${min} - ${max} ${sym}${suffix}`;
+                    saleText = `${saleValue(min)} - ${saleValue(max)} ${sym}${suffix}`;
+                }
+
+                if (saleIsOn && regularText && saleText) {
+                    el.innerHTML = `
+                        <span class="price-stack">
+                            <span class="price-old">${regularText}</span>
+                            <span class="price-sale">${saleText}</span>
+                        </span>
+                    `;
+                } else {
+                    el.innerText = regularText;
                 }
             });
         }
